@@ -1,5 +1,6 @@
+import 'package:e_commerce_with_firebase/core/theme/app_theme.dart';
+import 'package:e_commerce_with_firebase/features/auth/presentation/view/pages/sign_up_page.dart';
 import 'package:e_commerce_with_firebase/firebase_options.dart';
-import 'package:e_commerce_with_firebase/test.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +11,9 @@ void main() async {
   );
 
   MaterialApp myApp = MaterialApp(
-    home: Test(),
+    debugShowCheckedModeBanner: false,
+    home: SignUpPage(),
+    theme: appTheme,
   );
   runApp(myApp);
 }

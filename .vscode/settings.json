@@ -1,0 +1,13 @@
+{
+    "folder-color.pathColors": [
+        {
+            "folderPath": "e_commerce_with_firebase\\lib\\core\\models\\auth_input_model.dart\\",
+            "color": "foldercolorizer.color_000066"
+        },
+        {
+            "folderPath": "e_commerce_with_firebase\\lib\\core\\models\\",
+            "color": "foldercolorizer.color_0000ff"
+        }
+    ],
+    "java.configuration.updateBuildConfiguration": "interactive"
+}
