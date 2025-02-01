@@ -103,7 +103,7 @@ class TextStyles {
 
   static TextStyle semiBold32(BuildContext context) {
     return TextStyle(
-      color: AppColors.blackDesignColor,
+      color: AppColors.greyDesignColor,
       fontWeight: FontWeight.w600,
       fontSize: getResponsiveFontSize(context: context, fontSize: 32),
       height: 1.5, // 150%
@@ -112,6 +112,7 @@ class TextStyles {
 
   static TextStyle regular16_120(BuildContext context) {
     return TextStyle(
+      
       fontWeight: FontWeight.w400,
       fontSize: getResponsiveFontSize(fontSize: 16, context: context),
       height: 1.2, // 120%

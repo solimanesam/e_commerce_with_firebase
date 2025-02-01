@@ -9,6 +9,8 @@ abstract class AuthServices {
       {required AuthInputModel authInputModel});
   Future<User> signInWithEmailAndPassword(
       {required AuthInputModel authInputModel});
+
+  Future<void> deleteUser();
 }
 
 class FirebaseAuthServices extends AuthServices {
@@ -73,5 +75,10 @@ class FirebaseAuthServices extends AuthServices {
 
       throw ServerException(message: 'An error occurred. Please try again.');
     }
+  }
+
+  @override
+  Future<void> deleteUser() async {
+    await FirebaseAuth.instance.currentUser!.delete();
   }
 }

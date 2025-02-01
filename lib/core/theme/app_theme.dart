@@ -3,6 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 ThemeData appTheme = ThemeData(
-  scaffoldBackgroundColor: AppColors.greyDesignColor,
+  scaffoldBackgroundColor: AppColors.blackDesignColor,
   textTheme: GoogleFonts.soraTextTheme(ThemeData.light().textTheme),
 );
