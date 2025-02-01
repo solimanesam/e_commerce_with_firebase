@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 ThemeData appTheme = ThemeData(
-  scaffoldBackgroundColor: AppColors.blackDesignColor,
-  textTheme: GoogleFonts.soraTextTheme(ThemeData.light().textTheme),
-);
+    scaffoldBackgroundColor: AppColors.primaryColor,
+    textTheme: GoogleFonts.soraTextTheme(ThemeData.light().textTheme),
+    popupMenuTheme: PopupMenuThemeData(color: AppColors.secondryColor),
+    iconButtonTheme: IconButtonThemeData(
+        style: ButtonStyle(
+            iconColor: WidgetStatePropertyAll(AppColors.secondryColor),
+            iconSize: WidgetStatePropertyAll(30))));
