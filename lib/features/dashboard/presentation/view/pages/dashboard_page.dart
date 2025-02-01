@@ -1,5 +1,6 @@
 import 'package:e_commerce_with_firebase/core/theme/app_colors.dart';
 import 'package:e_commerce_with_firebase/core/theme/text_styles.dart';
+import 'package:e_commerce_with_firebase/features/dashboard/presentation/view/pages/home_page.dart';
 import 'package:flutter/material.dart';
 
 class DashboardPage extends StatelessWidget {
@@ -23,6 +24,15 @@ class DashboardPage extends StatelessWidget {
           
         }, icon: Icon(Icons.search)),
       ),
+       body: PageView(
+              controller: PageController(),
+              // onPageChanged: (index) {
+              //   controller.onPageChanged(index);
+              // },
+              children: const [
+                HomePage(),
+              ],
+            ),
     );
   }
 }

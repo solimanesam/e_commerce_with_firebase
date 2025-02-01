@@ -5,4 +5,5 @@ abstract class AppColors {
   static const secondryColor = Color(0xFF230C02);
   static const lightDesinColor = Color(0xFFFFF5E9);
   static const whiteDesignColor = Color(0xFFFFFFFF);
+  static const transparent = Colors.transparent;
 }
