@@ -17,6 +17,9 @@ class AuthCubit extends Cubit<AuthState> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  bool isVisible = true;
+  bool isVisible1 = false;
+  bool isVisible2 = true;
 
   signUp() async {
     emit(AuthState(signInStateEnum: RequestStateEnum.loading));
@@ -36,7 +39,12 @@ class AuthCubit extends Cubit<AuthState> {
     });
   }
 
-  login() async {
+  void login() async {
+    if (isVisible1 == false) {
+      isVisible1 = true;
+      isVisible = false;
+    }
+
     emit(AuthState(signInStateEnum: RequestStateEnum.loading));
     var result = await logInUserUseCase(
         parameters: AuthInputModel(
