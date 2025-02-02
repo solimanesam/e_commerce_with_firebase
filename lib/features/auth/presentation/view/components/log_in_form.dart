@@ -1,8 +1,11 @@
 import 'package:e_commerce_with_firebase/core/constants/view_constants.dart';
 import 'package:e_commerce_with_firebase/core/extentions/responsive_extention.dart';
+import 'package:e_commerce_with_firebase/core/models/app_text_field_input_model.dart';
+import 'package:e_commerce_with_firebase/core/models/custom_button_input_model.dart';
 import 'package:e_commerce_with_firebase/core/theme/app_colors.dart';
 import 'package:e_commerce_with_firebase/core/theme/text_styles.dart';
 import 'package:e_commerce_with_firebase/core/utils/enums.dart';
+import 'package:e_commerce_with_firebase/core/utils/sized_boxs.dart';
 import 'package:e_commerce_with_firebase/core/widgts/custom_button.dart';
 import 'package:e_commerce_with_firebase/core/widgts/custom_text_field.dart';
 import 'package:e_commerce_with_firebase/features/auth/presentation/controller/cubit/auth_cubit.dart';
@@ -29,10 +32,9 @@ class LoginForm extends StatelessWidget {
         return Form(
           key: cubit.formKey,
           child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+            padding: const EdgeInsets.symmetric(horizontal: 15.0),
             child: Column(
               spacing: 15,
-              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Visibility(
@@ -43,7 +45,7 @@ class LoginForm extends StatelessWidget {
                 Expanded(
                   child: Visibility(
                       visible: cubit.isVisible,
-                      child: Text('Welcome\nBack!',
+                      child: Text(ViewConstants.welcomeBack,
                           style: TextStyles.semiBold32(context))),
                 ),
                 ...List.generate(
@@ -54,20 +56,23 @@ class LoginForm extends StatelessWidget {
                               textFieldInputModel: TextFieldInputModel(
                                   context: context,
                                   controller: logInTextFieldControllers[index],
-                                  nameOfTextField:
-                                      ViewConstants.logInTextFieldsNames[index])),
+                                  nameOfTextField: ViewConstants
+                                      .logInTextFieldsNames[index])),
                         )),
-                CustomButton(
-                  loadingVisible: state.signInStateEnum == RequestStateEnum.loading,
+                customButton(
+                    customButtonInputModel: CustomButtonInputModel(
+                  context: context,
+                  loadingVisible:
+                      state.signInStateEnum == RequestStateEnum.loading,
                   textColor: AppColors.primaryColor,
                   color: AppColors.secondryColor,
-                  text: 'LogIn',
+                  text: ViewConstants.logInButtonText,
                   onPressed: () {
                     cubit.login();
                   },
-                ),
+                )),
                 const GoToSignUpButton(),
-                const Expanded(child: SizedBox())
+                SizedBoxs.sizedBoxH30
               ],
             ),
           ),

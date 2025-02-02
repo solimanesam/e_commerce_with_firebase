@@ -1,19 +1,7 @@
+import 'package:e_commerce_with_firebase/core/models/app_text_field_input_model.dart';
 import 'package:e_commerce_with_firebase/core/theme/app_colors.dart';
 import 'package:e_commerce_with_firebase/core/theme/text_styles.dart';
 import 'package:flutter/material.dart';
-
-class TextFieldInputModel {
-  TextFieldInputModel(
-      {required this.context,
-      required this.controller,
-      required this.nameOfTextField,
-      this.isSecure = false});
-
-  final TextEditingController controller;
-  final String nameOfTextField;
-  final bool isSecure;
-  final BuildContext context;
-}
 
 Widget customTextField({required TextFieldInputModel textFieldInputModel}) {
   return TextFormField(
