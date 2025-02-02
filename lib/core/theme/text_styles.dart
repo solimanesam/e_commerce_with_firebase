@@ -3,8 +3,9 @@ import 'package:e_commerce_with_firebase/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class TextStyles {
-  static TextStyle semiBold16(BuildContext context) {
+  static TextStyle semiBold16({required BuildContext context, required Color color}) {
     return TextStyle(
+      color:color,
       fontWeight: FontWeight.w600,
       fontSize: getResponsiveFontSize(context: context, fontSize: 16),
       height: 1.5, // 150%
@@ -79,6 +80,7 @@ class TextStyles {
 
   static TextStyle semiBold20(BuildContext context) {
     return TextStyle(
+      color: AppColors.secondryColor,
       fontWeight: FontWeight.w600,
       fontSize: getResponsiveFontSize(context: context, fontSize: 20),
       height: 1.5, // 150%
