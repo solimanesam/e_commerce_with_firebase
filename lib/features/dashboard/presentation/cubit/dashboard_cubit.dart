@@ -54,9 +54,6 @@ class DashboardCubit extends Cubit<DashboardState> {
         ],
       ),
       label: '',
-      activeIcon: Column(
-        mainAxisSize: MainAxisSize.min,
-      )
     );
   }
 }

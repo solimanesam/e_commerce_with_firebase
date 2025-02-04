@@ -49,7 +49,7 @@ class DashboardPage extends StatelessWidget {
               child: BottomNavigationBar(
                 
                 iconSize: 35,
-                backgroundColor: AppColors.lightDesinColor,
+                backgroundColor: AppColors.primaryColor,
                 selectedItemColor: AppColors.secondryColor,
                 unselectedItemColor: AppColors.secondryColor,
                 currentIndex: controller.selectedTapIndex,
