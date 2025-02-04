@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 part 'dashboard_state.dart';
 
 class DashboardCubit extends Cubit<DashboardState> {
-  DashboardCubit() : super(DashboardState(selectedTapIndex: 0));
+  DashboardCubit() : super(DashboardState());
   List<BottomNavigationBarItem> get bottomNavigationBarItems {
     return [
       buildNavItem(Icons.home_outlined, 0),
@@ -54,6 +54,9 @@ class DashboardCubit extends Cubit<DashboardState> {
         ],
       ),
       label: '',
+      activeIcon: Column(
+        mainAxisSize: MainAxisSize.min,
+      )
     );
   }
 }
