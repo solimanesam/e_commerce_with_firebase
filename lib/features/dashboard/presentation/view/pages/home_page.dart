@@ -25,6 +25,7 @@ class _HomePageState extends State<HomePage> {
         DefaultTabController(
           length: tabsStrings.length,
           child: TabBar(
+            
             tabAlignment: TabAlignment.start,//in order to remove start(left) padding
             isScrollable: true,//in order to fix text over flow issue
             physics: BouncingScrollPhysics(),

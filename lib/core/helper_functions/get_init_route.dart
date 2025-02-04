@@ -1,1 +1,1 @@
-String get getInitRoute => 'signUp';
+String get getInitRoute => 'dashboard';
