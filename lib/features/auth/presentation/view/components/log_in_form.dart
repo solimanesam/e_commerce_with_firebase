@@ -46,7 +46,7 @@ class LoginForm extends StatelessWidget {
                   child: Visibility(
                       visible: cubit.isVisible,
                       child: Text(ViewConstants.welcomeBack,
-                          style: TextStyles.semiBold32(context))),
+                          style: TextStyles.semiBold32(context, color: AppColors.secondryColor))),
                 ),
                 ...List.generate(
                     2,

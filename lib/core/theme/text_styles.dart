@@ -87,8 +87,9 @@ class TextStyles {
     );
   }
 
-  static TextStyle semiBold14auto(BuildContext context) {
+  static TextStyle semiBold14auto(BuildContext context,{required Color color}) {
     return TextStyle(
+      color:color ,
       fontWeight: FontWeight.w600,
       fontSize: getResponsiveFontSize(context: context, fontSize: 14),
       height: null, // Auto
@@ -103,8 +104,9 @@ class TextStyles {
     );
   }
 
-  static TextStyle semiBold32(BuildContext context) {
+  static TextStyle semiBold32(BuildContext context,{required Color color}) {
     return TextStyle(
+      color:color,
       fontWeight: FontWeight.w600,
       fontSize: getResponsiveFontSize(context: context, fontSize: 32),
       height: 1.5, // 150%
