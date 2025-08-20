@@ -18,7 +18,7 @@ class _HomePageState extends State<HomePage> {
         Padding(
           padding:  EdgeInsets.all(15.0),
           child: Text(
-            'What would you like \nto drink tday?',
+            'What would you like \nto drink today?',
             style: TextStyles.semiBold20(context),
           ),
         ),
