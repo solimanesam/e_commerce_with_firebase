@@ -51,7 +51,7 @@ class _HomePageState extends State<HomePage> {
 int activeTab = 0;
 const List<String> tabsStrings = [
   'Popular',
-  'Black coffe',
+  'Black coffee',
   'Winter special',
   'decaffe'
 ];

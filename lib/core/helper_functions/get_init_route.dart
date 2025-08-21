@@ -1,1 +1,1 @@
-String get getInitRoute => 'test';
+String get getInitRoute => 'adminhome';
