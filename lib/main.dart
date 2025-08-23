@@ -1,4 +1,4 @@
-import 'package:e_commerce_with_firebase/core/services/dependency_injection/auth_dependency_injection.dart';
+import 'package:e_commerce_with_firebase/core/services/dependency_injection/dependency_injection.dart';
 import 'package:e_commerce_with_firebase/core/helper_functions/get_init_route.dart';
 import 'package:e_commerce_with_firebase/core/helper_functions/on_generate_route.dart';
 import 'package:e_commerce_with_firebase/core/theme/app_theme.dart';
@@ -11,7 +11,7 @@ void main() async {
    await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  AuthDependencyInjection.init();
+  DependencyInjection.init();
  
 
   MaterialApp myApp = MaterialApp(
@@ -22,3 +22,4 @@ void main() async {
   );
   runApp(myApp);
 }
+

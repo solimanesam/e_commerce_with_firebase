@@ -37,7 +37,8 @@ class AdminRepo extends AdminBaseRepo {
   @override
   Future<Either<Failure, List<CoffeeEntity>>> getAllCoffees() async {
     try {
-      return Right(await adminService.getAllCoffees());
+      final result = await adminService.getAllCoffees();
+      return Right(result);
     } on FirebaseException catch (e) {
       return Left(ServerFailure(message: e.message ?? "Firebase error"));
     } catch (e) {

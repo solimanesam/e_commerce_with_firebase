@@ -1,7 +1,7 @@
 import 'package:e_commerce_with_firebase/core/constants/view_constants.dart';
 import 'package:e_commerce_with_firebase/core/models/app_text_field_input_model.dart';
 import 'package:e_commerce_with_firebase/core/models/custom_button_input_model.dart';
-import 'package:e_commerce_with_firebase/core/services/dependency_injection/auth_dependency_injection.dart';
+import 'package:e_commerce_with_firebase/core/services/dependency_injection/dependency_injection.dart';
 import 'package:e_commerce_with_firebase/core/theme/app_colors.dart';
 import 'package:e_commerce_with_firebase/core/theme/text_styles.dart';
 import 'package:e_commerce_with_firebase/core/utils/enums.dart';

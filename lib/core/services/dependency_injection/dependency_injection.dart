@@ -1,5 +1,9 @@
+import 'package:e_commerce_with_firebase/core/services/admin_service.dart';
 import 'package:e_commerce_with_firebase/core/services/auth_services.dart';
 import 'package:e_commerce_with_firebase/core/services/database_service.dart';
+import 'package:e_commerce_with_firebase/features/admin_dashboard/data/repos/admin_repo.dart';
+import 'package:e_commerce_with_firebase/features/admin_dashboard/domain/repos/admin_base_repo.dart';
+import 'package:e_commerce_with_firebase/features/admin_dashboard/presentation/controllers/cubit/admin_dashboard_cubit.dart';
 import 'package:e_commerce_with_firebase/features/auth/data/repos/auth_repo.dart';
 import 'package:e_commerce_with_firebase/features/auth/domain/repos/auth_base_repo.dart';
 import 'package:e_commerce_with_firebase/features/auth/domain/use_cases/log_in_user_use_case.dart';
@@ -9,9 +13,13 @@ import 'package:get_it/get_it.dart';
 
 GetIt getIt = GetIt.instance;
 
-class AuthDependencyInjection {
+class DependencyInjection {
   static void init() {
     getIt.registerFactory(() => AuthCubit(getIt(), getIt()));
+    getIt.registerFactory(() => AdminDashboardCubit(adminBaseRepo: getIt()));
+
+    getIt.registerLazySingleton<AdminBaseRepo>(
+        () => AdminRepo(adminService: getIt()));
 
     getIt.registerLazySingleton<SignUpUserUseCase>(
       () => SignUpUserUseCase(authBaseRepo: getIt()),
@@ -20,12 +28,12 @@ class AuthDependencyInjection {
     getIt.registerLazySingleton<LogInUserUseCase>(
         () => LogInUserUseCase(authBaseRepo: getIt()));
 
-   
-
     getIt.registerLazySingleton<AuthServices>(
       () => FirebaseAuthServices(),
     );
- getIt.registerLazySingleton<DatabaseService>(() => DatabaseServiceImpl());
+
+    getIt.registerLazySingleton<AdminService>(() => AdminServiceImpl());
+    getIt.registerLazySingleton<DatabaseService>(() => DatabaseServiceImpl());
     getIt.registerLazySingleton<AuthBaseRepo>(
       () => AuthRepo(authServices: getIt(), databaseService: getIt()),
     );
