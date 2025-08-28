@@ -20,3 +20,5 @@ final class AdminDashboardFailure extends AdminDashboardState {
   final String message;
   const AdminDashboardFailure({required this.message});
 }
+final class AdminDashboardImagePicked extends AdminDashboardState {}
+final class AdminDashboardSuccess extends AdminDashboardState {}

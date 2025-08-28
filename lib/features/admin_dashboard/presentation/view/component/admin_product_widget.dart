@@ -62,7 +62,13 @@ Widget adminproductWidget({
                 borderRadius: BorderRadius.circular(7),
                 child: Image.network(
                   image,
-                  fit: BoxFit.cover,
+                  fit: BoxFit.fill,
+                  errorBuilder: (context, error, stackTrace) {
+                    return const Icon(
+                      Icons.error,
+                      color: Colors.red,
+                    );
+                  },
                 ),
               ),
             ),
