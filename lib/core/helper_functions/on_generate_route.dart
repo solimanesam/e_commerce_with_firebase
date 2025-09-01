@@ -14,7 +14,6 @@ import 'package:flutter/material.dart';
 
 Route<dynamic> onGenerateRoute(RouteSettings settings) {
   switch (settings.name) {
-    
     case "login":
       return MaterialPageRoute<dynamic>(
         builder: (BuildContext context) => const LogInPage(),
@@ -23,22 +22,23 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
       return MaterialPageRoute<dynamic>(
         builder: (BuildContext context) => const SignUpPage(),
       );
-      case 'dashboard':
+    case 'dashboard':
       return MaterialPageRoute<dynamic>(
         builder: (BuildContext context) => const DashboardPage(),
       );
-      case 'test':
+    case 'test':
       return MaterialPageRoute<dynamic>(
         builder: (BuildContext context) => const TestPages(),
       );
-      case 'adminhome':
+    case 'adminhome':
       return MaterialPageRoute<dynamic>(
         builder: (BuildContext context) => const AdminHomePage(),
       );
-      case 'adminadd':
+    case 'adminadd':
       return MaterialPageRoute<dynamic>(
-        builder: (BuildContext context) =>  AdminAddPage(),
+        builder: (BuildContext context) => AdminAddPage(),
       );
+
     default:
       return MaterialPageRoute<dynamic>(
         builder: (BuildContext context) => const LogInPage(),

@@ -64,4 +64,17 @@ class AdminDashboardCubit extends Cubit<AdminDashboardState> {
       emit(AdminDashboardSuccess());
     });
   }
+
+  //////////update
+
+  updateCoffee({required CoffeeModel coffee}) async {
+    emit(AdminDashboardLoading());
+    final result = await adminBaseRepo.updateCoffee(coffee: coffee);
+    result.fold((l) {
+      emit(AdminDashboardFailure(message: l.message));
+    }, (r) {
+      print('success');
+      emit(AdminDashboardSuccess());
+    });
+  }
 }

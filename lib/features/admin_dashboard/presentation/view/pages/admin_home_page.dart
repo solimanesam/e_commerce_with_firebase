@@ -5,6 +5,7 @@ import 'package:e_commerce_with_firebase/core/widgts/custom_snake_bar.dart';
 import 'package:e_commerce_with_firebase/features/admin_dashboard/presentation/controllers/cubit/admin_dashboard_cubit.dart';
 import 'package:e_commerce_with_firebase/features/admin_dashboard/presentation/view/component/admin_product_widget.dart';
 import 'package:e_commerce_with_firebase/features/admin_dashboard/presentation/view/pages/admin_add_page.dart';
+import 'package:e_commerce_with_firebase/features/admin_dashboard/presentation/view/pages/admin_update_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -85,7 +86,20 @@ class AdminHomePage extends StatelessWidget {
                         coffeeName: state.coffees[index].name,
                         image: state.coffees[index].imageUrl,
                         price: state.coffees[index].price.toString(),
-                        onEdit: () {},
+                        onEdit: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => BlocProvider(
+                                        create: (context) =>
+                                            AdminDashboardCubit(
+                                          adminBaseRepo: getIt(),
+                                        ),
+                                        child: AdminUpdatePage(
+                                          coffee: state.coffees[index],
+                                        ),
+                                      )));
+                        },
                         onDelete: () {
                           context
                               .read<AdminDashboardCubit>()
