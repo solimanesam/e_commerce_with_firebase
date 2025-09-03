@@ -4,6 +4,7 @@ import 'package:e_commerce_with_firebase/core/services/database_service.dart';
 import 'package:e_commerce_with_firebase/features/admin_dashboard/data/repos/admin_repo.dart';
 import 'package:e_commerce_with_firebase/features/admin_dashboard/domain/repos/admin_base_repo.dart';
 import 'package:e_commerce_with_firebase/features/admin_dashboard/presentation/controllers/cubit/admin_dashboard_cubit.dart';
+import 'package:e_commerce_with_firebase/features/admin_dashboard/presentation/controllers/cubit/orders_cubit.dart';
 import 'package:e_commerce_with_firebase/features/auth/data/repos/auth_repo.dart';
 import 'package:e_commerce_with_firebase/features/auth/domain/repos/auth_base_repo.dart';
 import 'package:e_commerce_with_firebase/features/auth/domain/use_cases/log_in_user_use_case.dart';
@@ -17,6 +18,7 @@ class DependencyInjection {
   static void init() {
     getIt.registerFactory(() => AuthCubit(getIt(), getIt()));
     getIt.registerFactory(() => AdminDashboardCubit(adminBaseRepo: getIt()));
+    getIt.registerFactory(() => OrdersCubit(getIt()));
 
     getIt.registerLazySingleton<AdminBaseRepo>(
         () => AdminRepo(adminService: getIt()));

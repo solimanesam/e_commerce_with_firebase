@@ -32,7 +32,7 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
       );
     case 'adminhome':
       return MaterialPageRoute<dynamic>(
-        builder: (BuildContext context) => const AdminHomePage(),
+        builder: (BuildContext context) => const AdminDashboardPage(),
       );
     case 'adminadd':
       return MaterialPageRoute<dynamic>(
