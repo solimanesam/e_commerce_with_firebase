@@ -63,7 +63,7 @@ class OrderCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Text(
-                  "Total: \$${totalPrice.toStringAsFixed(2)}",
+                  "Total: ${totalPrice.toStringAsFixed(2)}EGP",
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
               ],
@@ -111,7 +111,7 @@ class OrderCard extends StatelessWidget {
       title: Text(item.coffee.name),
       subtitle: Text("${item.coffee.kind} - Qty: ${item.quantity}"),
       trailing: Text(
-        "\$${(item.coffee.price * item.quantity).toStringAsFixed(2)}",
+        "${(item.coffee.price * item.quantity).toStringAsFixed(2)}EGP",
         style: const TextStyle(fontWeight: FontWeight.bold),
       ),
     );
