@@ -2,7 +2,7 @@ import 'package:e_commerce_with_firebase/core/helper_functions/font_responsive.d
 import 'package:e_commerce_with_firebase/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
-class TextStyles {
+abstract class TextStyles {
   static TextStyle semiBold16({required BuildContext context, required Color color}) {
     return TextStyle(
       color:color,
@@ -97,6 +97,7 @@ class TextStyles {
 
   static TextStyle semiBold32auto(BuildContext context) {
     return TextStyle(
+      color: AppColors.activeGreyDesignColor,
       fontWeight: FontWeight.w600,
       fontSize: getResponsiveFontSize(context: context, fontSize: 32),
       height: null, // Auto
