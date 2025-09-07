@@ -2,6 +2,8 @@ import 'package:e_commerce_with_firebase/core/services/admin_service.dart';
 import 'package:e_commerce_with_firebase/core/services/auth_services.dart';
 import 'package:e_commerce_with_firebase/core/services/cache_service.dart';
 import 'package:e_commerce_with_firebase/core/services/database_service.dart';
+import 'package:e_commerce_with_firebase/core/services/local_notification_service.dart';
+import 'package:e_commerce_with_firebase/core/services/push_notifications_service.dart';
 import 'package:e_commerce_with_firebase/features/admin_dashboard/data/repos/admin_repo.dart';
 import 'package:e_commerce_with_firebase/features/admin_dashboard/domain/repos/admin_base_repo.dart';
 import 'package:e_commerce_with_firebase/features/admin_dashboard/presentation/controllers/cubit/admin_dashboard_cubit.dart';
@@ -30,7 +32,13 @@ class DependencyInjection {
 
     getIt.registerLazySingleton<LogInUserUseCase>(
         () => LogInUserUseCase(authBaseRepo: getIt()));
-
+    getIt.registerLazySingleton<LocalNotificationsService>(
+      () => LocalNotificationsServiceByFlutterLocalNotifications(),
+    );
+    getIt.registerLazySingleton<PushNotificationsService>(
+      () => PushNotificationsServiceImplByFirebaseMessaging(
+          localNotificationsService: getIt<LocalNotificationsService>()),
+    );
     getIt.registerLazySingleton<AuthServices>(
       () => FirebaseAuthServices(),
     );

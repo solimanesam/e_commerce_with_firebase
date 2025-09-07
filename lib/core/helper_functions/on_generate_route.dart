@@ -35,5 +35,6 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
     default:
       return MaterialPageRoute<dynamic>(
         builder: (BuildContext context) => const LogInPage(),
+      );
   }
 }
