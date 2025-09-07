@@ -1,9 +1,3 @@
-// class Routes {
-//  static List<Route> initroute = [
-//    MaterialPageRoute<dynamic>(builder: (BuildContext context) => const login_page(),),
-//     MaterialPageRoute<dynamic>(builder: (BuildContext context) => const Onboarding_page(),),
-//  ];
-
 import 'package:e_commerce_with_firebase/features/admin_dashboard/presentation/view/pages/admin_add_page.dart';
 import 'package:e_commerce_with_firebase/features/admin_dashboard/presentation/view/pages/admin_home_page.dart';
 import 'package:e_commerce_with_firebase/features/auth/presentation/view/pages/log_in_page.dart';

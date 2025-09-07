@@ -6,6 +6,7 @@ import 'package:e_commerce_with_firebase/core/theme/app_colors.dart';
 import 'package:e_commerce_with_firebase/core/theme/text_styles.dart';
 import 'package:e_commerce_with_firebase/core/utils/enums.dart';
 import 'package:e_commerce_with_firebase/core/widgts/custom_button.dart';
+import 'package:e_commerce_with_firebase/core/widgts/custom_snake_bar.dart';
 import 'package:e_commerce_with_firebase/core/widgts/custom_text_field.dart';
 import 'package:e_commerce_with_firebase/features/auth/presentation/controller/cubit/auth_cubit.dart';
 import 'package:e_commerce_with_firebase/features/auth/presentation/view/pages/log_in_page.dart';
@@ -22,7 +23,19 @@ class SignUpPage extends StatelessWidget {
       child: Scaffold(
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15.0),
-          child: BlocBuilder<AuthCubit, AuthState>(
+          child: BlocConsumer<AuthCubit, AuthState>(
+            listener: (context, state) {
+              if (state.signUpStateEnum == RequestStateEnum.success) {
+                showCustomSnackBar(context,
+                    message: "Sign Up Success", type: SnackBarType.success);
+                Navigator.of(context).pushReplacementNamed('login');
+              }
+
+              if (state.signUpStateEnum == RequestStateEnum.failed) {
+                showCustomSnackBar(context,
+                    message: state.signUpMessage, type: SnackBarType.failure);
+              }
+            },
             builder: (context, state) {
               final AuthCubit cubit = context.read<AuthCubit>();
               List<TextEditingController> logInTextFieldControllers = [
@@ -42,6 +55,7 @@ class SignUpPage extends StatelessWidget {
                         (index) => customTextField(
                             textFieldInputModel: TextFieldInputModel(
                                 context: context,
+                                isSecure: true,
                                 controller: logInTextFieldControllers[index],
                                 nameOfTextField: ViewConstants
                                     .logInTextFieldsNames[index]))),

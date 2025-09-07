@@ -2,6 +2,7 @@ import 'package:e_commerce_with_firebase/core/theme/app_colors.dart';
 import 'package:e_commerce_with_firebase/core/theme/text_styles.dart';
 import 'package:e_commerce_with_firebase/features/admin_dashboard/presentation/view/component/products.dart';
 import 'package:e_commerce_with_firebase/features/admin_dashboard/presentation/view/component/requests.dart';
+import 'package:e_commerce_with_firebase/features/shared/presentation/pages/settings_page.dart';
 import 'package:flutter/material.dart';
 
 class AdminDashboardPage extends StatelessWidget {
@@ -10,7 +11,7 @@ class AdminDashboardPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 2,
+      length: 3,
       child: Scaffold(
         appBar: AppBar(
           shape: Border(
@@ -28,6 +29,7 @@ class AdminDashboardPage extends StatelessWidget {
             tabs: [
               Tab(icon: Icon(Icons.coffee), text: "Products"),
               Tab(icon: Icon(Icons.receipt_long), text: "Requests"),
+              Tab(icon: Icon(Icons.settings), text: "Settings"),
             ],
           ),
         ),
@@ -35,6 +37,7 @@ class AdminDashboardPage extends StatelessWidget {
           children: [
             Products(),
             Requests(),
+            SettingsPage(),
           ],
         ),
       ),

@@ -1,5 +1,6 @@
 import 'package:e_commerce_with_firebase/core/services/admin_service.dart';
 import 'package:e_commerce_with_firebase/core/services/auth_services.dart';
+import 'package:e_commerce_with_firebase/core/services/cache_service.dart';
 import 'package:e_commerce_with_firebase/core/services/database_service.dart';
 import 'package:e_commerce_with_firebase/features/admin_dashboard/data/repos/admin_repo.dart';
 import 'package:e_commerce_with_firebase/features/admin_dashboard/domain/repos/admin_base_repo.dart';
@@ -37,7 +38,12 @@ class DependencyInjection {
     getIt.registerLazySingleton<AdminService>(() => AdminServiceImpl());
     getIt.registerLazySingleton<DatabaseService>(() => DatabaseServiceImpl());
     getIt.registerLazySingleton<AuthBaseRepo>(
-      () => AuthRepo(authServices: getIt(), databaseService: getIt()),
+      () => AuthRepo(
+          authServices: getIt(),
+          databaseService: getIt(),
+          cacheService: getIt()),
     );
+    getIt.registerLazySingleton<BaseCacheService>(
+        () => CacheImplBySharedPreferences());
   }
 }
