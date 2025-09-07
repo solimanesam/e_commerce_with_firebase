@@ -1,9 +1,5 @@
-// class Routes {
-//  static List<Route> initroute = [
-//    MaterialPageRoute<dynamic>(builder: (BuildContext context) => const login_page(),),
-//     MaterialPageRoute<dynamic>(builder: (BuildContext context) => const Onboarding_page(),),
-//  ];
-
+import 'package:e_commerce_with_firebase/features/admin_dashboard/presentation/view/pages/admin_add_page.dart';
+import 'package:e_commerce_with_firebase/features/admin_dashboard/presentation/view/pages/admin_home_page.dart';
 import 'package:e_commerce_with_firebase/features/auth/presentation/view/pages/log_in_page.dart';
 import 'package:e_commerce_with_firebase/features/auth/presentation/view/pages/sign_up_page.dart';
 import 'package:e_commerce_with_firebase/features/dashboard/presentation/view/pages/dashboard_page.dart';
@@ -28,9 +24,16 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
       return MaterialPageRoute<dynamic>(
         builder: (BuildContext context) => const DetailsPage(),
       );
+    case 'adminhome':
+      return MaterialPageRoute<dynamic>(
+        builder: (BuildContext context) => const AdminDashboardPage(),
+      );
+    case 'adminadd':
+      return MaterialPageRoute<dynamic>(
+        builder: (BuildContext context) => AdminAddPage(),
+      );
     default:
       return MaterialPageRoute<dynamic>(
         builder: (BuildContext context) => const LogInPage(),
-      );
   }
 }

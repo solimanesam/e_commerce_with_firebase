@@ -18,13 +18,14 @@ class _HomePageState extends State<HomePage> {
         Padding(
           padding:  EdgeInsets.all(15.0),
           child: Text(
-            'What would you like \nto drink tday?',
+            'What would you like \nto drink today?',
             style: TextStyles.semiBold20(context),
           ),
         ),
         DefaultTabController(
           length: tabsStrings.length,
           child: TabBar(
+            
             tabAlignment: TabAlignment.start,//in order to remove start(left) padding
             isScrollable: true,//in order to fix text over flow issue
             physics: BouncingScrollPhysics(),
@@ -50,7 +51,7 @@ class _HomePageState extends State<HomePage> {
 int activeTab = 0;
 const List<String> tabsStrings = [
   'Popular',
-  'Black coffe',
+  'Black coffee',
   'Winter special',
   'decaffe'
 ];

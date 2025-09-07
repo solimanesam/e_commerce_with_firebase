@@ -7,6 +7,7 @@ import 'package:e_commerce_with_firebase/core/theme/text_styles.dart';
 import 'package:e_commerce_with_firebase/core/utils/enums.dart';
 import 'package:e_commerce_with_firebase/core/utils/sized_boxs.dart';
 import 'package:e_commerce_with_firebase/core/widgts/custom_button.dart';
+import 'package:e_commerce_with_firebase/core/widgts/custom_snake_bar.dart';
 import 'package:e_commerce_with_firebase/core/widgts/custom_text_field.dart';
 import 'package:e_commerce_with_firebase/features/auth/presentation/controller/cubit/auth_cubit.dart';
 import 'package:e_commerce_with_firebase/features/auth/presentation/view/components/go_to_sign_up_page_button.dart';
@@ -20,7 +21,20 @@ class LoginForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AuthCubit, AuthState>(
+    return BlocConsumer<AuthCubit, AuthState>(
+      listener: (context, state) {
+        if (state.signInStateEnum == RequestStateEnum.success) {
+          showCustomSnackBar(context,
+              message: "Log In Success", type: SnackBarType.success);
+          Navigator.of(context)
+              .pushNamedAndRemoveUntil('adminhome', (route) => false);
+        }
+
+        if (state.signInStateEnum == RequestStateEnum.failed) {
+          showCustomSnackBar(context,
+              message: state.signInMessage, type: SnackBarType.failure);
+        }
+      },
       builder: (context, state) {
         final AuthCubit cubit = context.read<AuthCubit>();
 
@@ -46,7 +60,8 @@ class LoginForm extends StatelessWidget {
                   child: Visibility(
                       visible: cubit.isVisible,
                       child: Text(ViewConstants.welcomeBack,
-                          style: TextStyles.semiBold32(context))),
+                          style: TextStyles.semiBold32(context,
+                              color: AppColors.secondryColor))),
                 ),
                 ...List.generate(
                     2,
@@ -55,6 +70,7 @@ class LoginForm extends StatelessWidget {
                           child: customTextField(
                               textFieldInputModel: TextFieldInputModel(
                                   context: context,
+                                  isSecure: false,
                                   controller: logInTextFieldControllers[index],
                                   nameOfTextField: ViewConstants
                                       .logInTextFieldsNames[index])),

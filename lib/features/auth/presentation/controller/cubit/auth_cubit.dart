@@ -34,7 +34,7 @@ class AuthCubit extends Cubit<AuthState> {
             signInStateEnum: RequestStateEnum.failed)), (r) {
       if (formKey.currentState!.validate()) {
         print('success');
-        emit(AuthState(signInStateEnum: RequestStateEnum.success));
+        emit(AuthState(signUpStateEnum: RequestStateEnum.success));
       }
     });
   }
@@ -45,18 +45,17 @@ class AuthCubit extends Cubit<AuthState> {
       isVisible = false;
     }
 
-    emit(AuthState(signInStateEnum: RequestStateEnum.loading));
-    var result = await logInUserUseCase(
-        parameters: AuthInputModel(
-            email: emailController.text, password: passwordController.text));
-    result.fold(
-        (l) => emit(AuthState(
-            signInMessage: l.message,
-            signInStateEnum: RequestStateEnum.failed)), (r) {
-      if (formKey.currentState!.validate()) {
-        print('success');
+    if (formKey.currentState!.validate()) {
+      emit(AuthState(signInStateEnum: RequestStateEnum.loading));
+      var result = await logInUserUseCase(
+          parameters: AuthInputModel(
+              email: emailController.text, password: passwordController.text));
+      result.fold(
+          (l) => emit(AuthState(
+              signInMessage: l.message,
+              signInStateEnum: RequestStateEnum.failed)), (r) {
         emit(AuthState(signInStateEnum: RequestStateEnum.success));
-      }
-    });
+      });
+    }
   }
 }
