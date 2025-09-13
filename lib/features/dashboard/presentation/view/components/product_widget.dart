@@ -6,7 +6,8 @@ Widget productWidgt(
     {required BuildContext context,
     required String coffeekind,
     required String coffeename,
-    required String image}) {
+    required String image,
+    required String price}) {
   return Padding(
     padding: EdgeInsets.all(20),
     child: Container(
@@ -38,9 +39,11 @@ Widget productWidgt(
                       style: TextStyles.semiBold16(
                           context: context, color: AppColors.secondryColor),
                     ),
-                    Spacer(
-                      flex: 6,
-                    )
+                    Text(
+                      '$price EGP',
+                      style: TextStyles.semiBold16(
+                          context: context, color: AppColors.secondryColor),
+                    ),
                   ],
                 ),
               )),

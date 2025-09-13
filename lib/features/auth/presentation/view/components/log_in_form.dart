@@ -1,5 +1,6 @@
 import 'package:e_commerce_with_firebase/core/constants/view_constants.dart';
 import 'package:e_commerce_with_firebase/core/extentions/responsive_extention.dart';
+import 'package:e_commerce_with_firebase/core/helper_functions/get_init_route.dart';
 import 'package:e_commerce_with_firebase/core/models/app_text_field_input_model.dart';
 import 'package:e_commerce_with_firebase/core/models/custom_button_input_model.dart';
 import 'package:e_commerce_with_firebase/core/theme/app_colors.dart';
@@ -15,9 +16,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginForm extends StatelessWidget {
-  const LoginForm({
-    super.key,
-  });
+  const LoginForm({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,8 +25,11 @@ class LoginForm extends StatelessWidget {
         if (state.signInStateEnum == RequestStateEnum.success) {
           showCustomSnackBar(context,
               message: "Log In Success", type: SnackBarType.success);
-          Navigator.of(context)
-              .pushNamedAndRemoveUntil('adminhome', (route) => false);
+
+          Navigator.of(context).pushNamedAndRemoveUntil(
+            getInitRoute,
+            (route) => false,
+          );
         }
 
         if (state.signInStateEnum == RequestStateEnum.failed) {
@@ -43,6 +45,8 @@ class LoginForm extends StatelessWidget {
           cubit.passwordController
         ];
 
+        final isLoading = state.signInStateEnum == RequestStateEnum.loading;
+
         return Form(
           key: cubit.formKey,
           child: Padding(
@@ -51,41 +55,30 @@ class LoginForm extends StatelessWidget {
               spacing: 15,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Visibility(
-                    visible: cubit.isVisible,
-                    child: SizedBox(
-                      height: context.height * 1 / 3 + 15.0,
-                    )),
-                Expanded(
-                  child: Visibility(
-                      visible: cubit.isVisible,
-                      child: Text(ViewConstants.welcomeBack,
-                          style: TextStyles.semiBold32(context,
-                              color: AppColors.secondryColor))),
+                SizedBox(
+                  height: context.height * 1 / 3 + 15.0,
                 ),
+                Expanded(
+                    child: Text(ViewConstants.welcomeBack,
+                        style: TextStyles.semiBold32(context,
+                            color: AppColors.secondryColor))),
                 ...List.generate(
                     2,
-                    (index) => Visibility(
-                          visible: cubit.isVisible1,
-                          child: customTextField(
-                              textFieldInputModel: TextFieldInputModel(
-                                  context: context,
-                                  isSecure: false,
-                                  controller: logInTextFieldControllers[index],
-                                  nameOfTextField: ViewConstants
-                                      .logInTextFieldsNames[index])),
-                        )),
+                    (index) => customTextField(
+                        textFieldInputModel: TextFieldInputModel(
+                            context: context,
+                            isSecure: index == 1,
+                            controller: logInTextFieldControllers[index],
+                            nameOfTextField:
+                                ViewConstants.logInTextFieldsNames[index]))),
                 customButton(
                     customButtonInputModel: CustomButtonInputModel(
                   context: context,
-                  loadingVisible:
-                      state.signInStateEnum == RequestStateEnum.loading,
+                  loadingVisible: isLoading,
                   textColor: AppColors.primaryColor,
                   color: AppColors.secondryColor,
                   text: ViewConstants.logInButtonText,
-                  onPressed: () {
-                    cubit.login();
-                  },
+                  onPressed: isLoading ? null : () => cubit.login(),
                 )),
                 const GoToSignUpButton(),
                 SizedBoxs.sizedBoxH30

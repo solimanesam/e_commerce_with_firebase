@@ -55,7 +55,7 @@ class SignUpPage extends StatelessWidget {
                         (index) => customTextField(
                             textFieldInputModel: TextFieldInputModel(
                                 context: context,
-                                isSecure: true,
+                                isSecure: index == 1,
                                 controller: logInTextFieldControllers[index],
                                 nameOfTextField: ViewConstants
                                     .logInTextFieldsNames[index]))),

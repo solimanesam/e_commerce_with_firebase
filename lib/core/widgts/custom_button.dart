@@ -7,30 +7,44 @@ Widget customButton({required CustomButtonInputModel customButtonInputModel}) {
   return SizedBox(
     width: double.infinity,
     child: ElevatedButton(
-      onPressed: customButtonInputModel.onPressed,
+      onPressed: customButtonInputModel.loadingVisible
+          ? null
+          : () {
+              // ✅ هنا بنعمل validation
+              final formState = Form.of(customButtonInputModel.context);
+              if (formState != null && formState.validate()) {
+                customButtonInputModel.onPressed!();
+              }
+            },
       style: ElevatedButton.styleFrom(
         backgroundColor: customButtonInputModel.color,
-        padding: EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+        padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
         shape: RoundedRectangleBorder(
-          side: BorderSide(color: AppColors.secondryColor, width: 2),
+          side: const BorderSide(color: AppColors.secondryColor, width: 2),
           borderRadius: BorderRadius.circular(50),
         ),
       ),
       child: Row(
-        spacing: 5.0,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(customButtonInputModel.text,
-              style: TextStyles.semiBold16(
-                  context: customButtonInputModel.context,
-                  color: customButtonInputModel.textColor)),
-          Visibility(
-              visible: customButtonInputModel.loadingVisible,
-              child: SizedBox(
-                  height: 20,
-                  width: 20,
-                  child: CircularProgressIndicator(
-                      color: AppColors.primaryColor, strokeWidth: 2)))
+          Text(
+            customButtonInputModel.text,
+            style: TextStyles.semiBold16(
+              context: customButtonInputModel.context,
+              color: customButtonInputModel.textColor,
+            ),
+          ),
+          if (customButtonInputModel.loadingVisible) ...[
+            const SizedBox(width: 10),
+            const SizedBox(
+              height: 20,
+              width: 20,
+              child: CircularProgressIndicator(
+                color: AppColors.primaryColor,
+                strokeWidth: 2,
+              ),
+            ),
+          ]
         ],
       ),
     ),

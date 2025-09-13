@@ -13,49 +13,47 @@ class AuthCubit extends Cubit<AuthState> {
   final LogInUserUseCase logInUserUseCase;
   AuthCubit(this.signUpUserUseCase, this.logInUserUseCase)
       : super(const AuthState());
+
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  bool isVisible = true;
-  bool isVisible1 = false;
-  bool isVisible2 = true;
 
-  signUp() async {
-    emit(AuthState(signInStateEnum: RequestStateEnum.loading));
-    var result = await signUpUserUseCase(
+  Future<void> signUp() async {
+    if (!formKey.currentState!.validate()) return;
+    emit(AuthState(signUpStateEnum: RequestStateEnum.loading));
+    final result = await signUpUserUseCase(
         parameters: AuthInputModel(
             name: nameController.text,
             email: emailController.text,
             password: passwordController.text));
-    result.fold(
-        (l) => emit(AuthState(
-            signUpMessage: l.message,
-            signInStateEnum: RequestStateEnum.failed)), (r) {
-      if (formKey.currentState!.validate()) {
-        print('success');
-        emit(AuthState(signUpStateEnum: RequestStateEnum.success));
-      }
+    result.fold((l) {
+      emit(AuthState(
+          signUpMessage: l.message, signUpStateEnum: RequestStateEnum.failed));
+    }, (r) {
+      // clear fields and emit success
+      nameController.clear();
+      emailController.clear();
+      passwordController.clear();
+      emit(AuthState(signUpStateEnum: RequestStateEnum.success));
     });
   }
 
-  void login() async {
-    if (isVisible1 == false) {
-      isVisible1 = true;
-      isVisible = false;
-    }
+  Future<void> login() async {
+    if (!formKey.currentState!.validate()) return;
 
-    if (formKey.currentState!.validate()) {
-      emit(AuthState(signInStateEnum: RequestStateEnum.loading));
-      var result = await logInUserUseCase(
-          parameters: AuthInputModel(
-              email: emailController.text, password: passwordController.text));
-      result.fold(
-          (l) => emit(AuthState(
-              signInMessage: l.message,
-              signInStateEnum: RequestStateEnum.failed)), (r) {
-        emit(AuthState(signInStateEnum: RequestStateEnum.success));
-      });
-    }
+    emit(AuthState(signInStateEnum: RequestStateEnum.loading));
+    final result = await logInUserUseCase(
+        parameters: AuthInputModel(
+            email: emailController.text, password: passwordController.text));
+    result.fold((l) {
+      emit(AuthState(
+          signInMessage: l.message, signInStateEnum: RequestStateEnum.failed));
+    }, (r) {
+      // clear fields
+      emailController.clear();
+      passwordController.clear();
+      emit(AuthState(signInStateEnum: RequestStateEnum.success));
+    });
   }
 }

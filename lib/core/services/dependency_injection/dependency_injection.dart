@@ -11,6 +11,7 @@ import 'package:e_commerce_with_firebase/features/auth/domain/repos/auth_base_re
 import 'package:e_commerce_with_firebase/features/auth/domain/use_cases/log_in_user_use_case.dart';
 import 'package:e_commerce_with_firebase/features/auth/domain/use_cases/sign_up_user_use_case.dart';
 import 'package:e_commerce_with_firebase/features/auth/presentation/controller/cubit/auth_cubit.dart';
+import 'package:e_commerce_with_firebase/features/dashboard/presentation/cubit/getcoffee_cubit.dart';
 import 'package:get_it/get_it.dart';
 
 GetIt getIt = GetIt.instance;
@@ -18,6 +19,7 @@ GetIt getIt = GetIt.instance;
 class DependencyInjection {
   static void init() {
     getIt.registerFactory(() => AuthCubit(getIt(), getIt()));
+    getIt.registerFactory(() => GetcoffeeCubit(getIt()));
     getIt.registerFactory(() => AdminDashboardCubit(adminBaseRepo: getIt()));
     getIt.registerFactory(() => OrdersCubit(getIt()));
 

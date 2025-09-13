@@ -15,11 +15,13 @@ class AuthRepo extends AuthBaseRepo {
   final AuthServices authServices;
   final DatabaseService databaseService;
   final BaseCacheService cacheService;
+
   AuthRepo({
     required this.databaseService,
     required this.authServices,
     required this.cacheService,
   });
+
   @override
   Future<Either<Failure, Unit>> signUpUser(
       {required AuthInputModel authInputModel}) async {
@@ -27,14 +29,18 @@ class AuthRepo extends AuthBaseRepo {
     try {
       user = await authServices.createUserWithEmailAndPassword(
           authInputModel: authInputModel);
+
       var userEntity = UserEntity(
           name: authInputModel.name!,
           email: authInputModel.email,
           uId: user.uid);
-      cacheService.insertStringToCache(
+
+      // store uId and name in cache
+      await cacheService.insertStringToCache(key: 'uId', value: user.uid);
+      await cacheService.insertStringToCache(
           key: 'name', value: authInputModel.name!);
 
-      addDataUser(userEntity: userEntity);
+      await addDataUser(userEntity: userEntity);
       return Right(unit);
     } on ServerException catch (e) {
       await deleteUser(user);
@@ -46,15 +52,45 @@ class AuthRepo extends AuthBaseRepo {
   }
 
   @override
-  Future<Either<Failure, Unit>> logInUser(
-      {required AuthInputModel authinputModel}) async {
+  Future<Either<Failure, Unit>> logInUser({
+    required AuthInputModel authinputModel,
+  }) async {
     try {
       final User user = await authServices.signInWithEmailAndPassword(
-          authInputModel: authinputModel);
-      cacheService.insertStringToCache(key: 'uId', value: user.uid);
-      return Right(unit);
+        authInputModel: authinputModel,
+      );
+
+      // ✅ save uId in cache
+      await cacheService.insertStringToCache(key: 'uId', value: user.uid);
+
+      // ✅ read user doc from Firestore
+      final data = await databaseService.getData(
+        databaseInputModel: DatabaseInputModel(
+          path: 'users',
+          docuementId: user.uid,
+        ),
+      );
+
+      String name;
+
+      if (data != null) {
+        final userModel = UserModel.fromDocument(data);
+        name = userModel.name;
+      } else {
+        // fallback لو document مش موجود
+        name = "Guest";
+      }
+
+      // ✅ save name in cache
+      await cacheService.insertStringToCache(key: 'name', value: name);
+
+      return const Right(unit);
     } on ServerException catch (e) {
+      print(e.message);
       return Left(ServerFailure(message: e.message));
+    } catch (e) {
+      print(e.toString());
+      return Left(ServerFailure(message: e.toString()));
     }
   }
 

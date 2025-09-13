@@ -7,12 +7,12 @@ abstract class DatabaseService {
 }
 
 class DatabaseServiceImpl implements DatabaseService {
-  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   @override
-  Future addData({required DatabaseInputModel databaseInputModel}) async {
+  Future<void> addData({required DatabaseInputModel databaseInputModel}) async {
     if (databaseInputModel.docuementId != null) {
-      firestore
+      await firestore
           .collection(databaseInputModel.path)
           .doc(databaseInputModel.docuementId)
           .set(databaseInputModel.data!);
@@ -24,11 +24,14 @@ class DatabaseServiceImpl implements DatabaseService {
   }
 
   @override
-  Future getData({required DatabaseInputModel databaseInputModel}) async {
-    var data = await firestore
+  Future<Map<String, dynamic>?> getData(
+      {required DatabaseInputModel databaseInputModel}) async {
+    final doc = await firestore
         .collection(databaseInputModel.path)
         .doc(databaseInputModel.docuementId)
         .get();
-    return data.data() as Map<String, dynamic>;
+
+    if (!doc.exists) return null;
+    return doc.data();
   }
 }
