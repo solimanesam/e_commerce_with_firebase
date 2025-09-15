@@ -5,7 +5,6 @@ class CustomButtonInputModel {
   final VoidCallback? onPressed; // nullable
   final Color color;
   final Color textColor;
-  final bool loadingVisible;
   final BuildContext context;
 
   const CustomButtonInputModel({
@@ -14,6 +13,5 @@ class CustomButtonInputModel {
     required this.onPressed,
     required this.color,
     required this.textColor,
-    this.loadingVisible = false,
   });
 }

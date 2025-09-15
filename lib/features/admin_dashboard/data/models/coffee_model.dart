@@ -21,6 +21,7 @@ class CoffeeModel extends CoffeeEntity {
 
   Map<String, dynamic> toMap() {
     return {
+      "id": id,
       "name": name,
       "kind": kind,
       "price": price,

@@ -9,25 +9,27 @@ import 'package:e_commerce_with_firebase/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
   DependencyInjection.init();
 
   await Future.wait([
-    Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    ),
     getIt<BaseCacheService>().cacheintIalization(),
-    getIt<PushNotificationsService>().init(),
-    getIt<LocalNotificationsService>().initialize(),
+    // getIt<PushNotificationsService>().init(),
+    // getIt<LocalNotificationsService>().initialize(),
   ]);
 
-  MaterialApp myApp = MaterialApp(
-    debugShowCheckedModeBanner: false,
-    onGenerateRoute: onGenerateRoute,
-    initialRoute: getInitRoute,
-    theme: appTheme,
+  runApp(
+    MaterialApp(
+      debugShowCheckedModeBanner: false,
+      onGenerateRoute: onGenerateRoute,
+      initialRoute: getInitRoute,
+      theme: appTheme,
+    ),
   );
-  runApp(myApp);
 }

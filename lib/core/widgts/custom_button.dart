@@ -7,15 +7,7 @@ Widget customButton({required CustomButtonInputModel customButtonInputModel}) {
   return SizedBox(
     width: double.infinity,
     child: ElevatedButton(
-      onPressed: customButtonInputModel.loadingVisible
-          ? null
-          : () {
-              // ✅ هنا بنعمل validation
-              final formState = Form.of(customButtonInputModel.context);
-              if (formState != null && formState.validate()) {
-                customButtonInputModel.onPressed!();
-              }
-            },
+      onPressed: customButtonInputModel.onPressed,
       style: ElevatedButton.styleFrom(
         backgroundColor: customButtonInputModel.color,
         padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
@@ -34,17 +26,6 @@ Widget customButton({required CustomButtonInputModel customButtonInputModel}) {
               color: customButtonInputModel.textColor,
             ),
           ),
-          if (customButtonInputModel.loadingVisible) ...[
-            const SizedBox(width: 10),
-            const SizedBox(
-              height: 20,
-              width: 20,
-              child: CircularProgressIndicator(
-                color: AppColors.primaryColor,
-                strokeWidth: 2,
-              ),
-            ),
-          ]
         ],
       ),
     ),

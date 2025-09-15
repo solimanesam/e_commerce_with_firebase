@@ -32,6 +32,7 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
       return MaterialPageRoute<dynamic>(
         builder: (BuildContext context) => AdminAddPage(),
       );
+
     default:
       return MaterialPageRoute<dynamic>(
         builder: (BuildContext context) => const LogInPage(),

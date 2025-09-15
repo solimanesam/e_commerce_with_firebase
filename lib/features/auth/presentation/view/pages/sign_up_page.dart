@@ -75,20 +75,25 @@ class SignUpPage extends StatelessWidget {
                         ),
                       ],
                     ),
-                    customButton(
-                        customButtonInputModel: CustomButtonInputModel(
-                      context: context,
-                      loadingVisible:
-                          state.signUpStateEnum == RequestStateEnum.loading,
-                      textColor: AppColors.primaryColor,
-                      color: AppColors.secondryColor,
-                      text: 'SignUp',
-                      onPressed: () {
-                        if (cubit.formKey.currentState!.validate()) {
-                          cubit.signUp();
-                        }
+                    BlocBuilder<AuthCubit, AuthState>(
+                      builder: (context, state) {
+                        return customButton(
+                            customButtonInputModel: CustomButtonInputModel(
+                          context: context,
+                          textColor: AppColors.primaryColor,
+                          color: AppColors.secondryColor,
+                          text:
+                              state.signUpStateEnum == RequestStateEnum.loading
+                                  ? 'Loading...'
+                                  : 'SignUp',
+                          onPressed: () {
+                            if (cubit.formKey.currentState!.validate()) {
+                              cubit.signUp();
+                            }
+                          },
+                        ));
                       },
-                    )),
+                    ),
                   ],
                 ),
               );

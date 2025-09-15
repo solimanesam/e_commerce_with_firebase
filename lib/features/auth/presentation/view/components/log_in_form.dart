@@ -71,15 +71,20 @@ class LoginForm extends StatelessWidget {
                             controller: logInTextFieldControllers[index],
                             nameOfTextField:
                                 ViewConstants.logInTextFieldsNames[index]))),
-                customButton(
-                    customButtonInputModel: CustomButtonInputModel(
-                  context: context,
-                  loadingVisible: isLoading,
-                  textColor: AppColors.primaryColor,
-                  color: AppColors.secondryColor,
-                  text: ViewConstants.logInButtonText,
-                  onPressed: isLoading ? null : () => cubit.login(),
-                )),
+                BlocBuilder<AuthCubit, AuthState>(
+                  builder: (context, state) {
+                    return customButton(
+                        customButtonInputModel: CustomButtonInputModel(
+                      context: context,
+                      textColor: AppColors.primaryColor,
+                      color: AppColors.secondryColor,
+                      text: state.signInStateEnum == RequestStateEnum.loading
+                          ? "Loading..."
+                          : ViewConstants.logInButtonText,
+                      onPressed: isLoading ? null : () => cubit.login(),
+                    ));
+                  },
+                ),
                 const GoToSignUpButton(),
                 SizedBoxs.sizedBoxH30
               ],

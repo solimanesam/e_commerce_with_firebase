@@ -1,5 +1,8 @@
+import 'package:e_commerce_with_firebase/core/services/dependency_injection/dependency_injection.dart';
+import 'package:e_commerce_with_firebase/features/dashboard/presentation/cubit/cart_cubit.dart';
 import 'package:e_commerce_with_firebase/features/dashboard/presentation/cubit/getcoffee_cubit.dart';
 import 'package:e_commerce_with_firebase/features/dashboard/presentation/view/components/product_widget.dart';
+import 'package:e_commerce_with_firebase/features/dashboard/presentation/view/pages/add_to_cart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -40,12 +43,27 @@ class _DisplayUserCoffeeState extends State<DisplayUserCoffee> {
               : ListView.builder(
                   itemCount: cubit.coffees.length,
                   itemBuilder: (context, index) {
-                    return productWidgt(
-                        context: context,
-                        price: cubit.coffees[index].price.toString(),
-                        coffeekind: cubit.coffees[index].kind,
-                        coffeename: cubit.coffees[index].name,
-                        image: cubit.coffees[index].imageUrl);
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(
+                          builder: (context) {
+                            return BlocProvider(
+                              create: (context) =>
+                                  CartCubit(cartBaseRepo: getIt()),
+                              child: AddToCart(
+                                coffee: cubit.coffees[index],
+                              ),
+                            );
+                          },
+                        ));
+                      },
+                      child: productWidgt(
+                          context: context,
+                          price: cubit.coffees[index].price.toString(),
+                          coffeekind: cubit.coffees[index].kind,
+                          coffeename: cubit.coffees[index].name,
+                          image: cubit.coffees[index].imageUrl),
+                    );
                   },
                 );
         }

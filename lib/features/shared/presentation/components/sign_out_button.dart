@@ -1,8 +1,6 @@
-import 'package:e_commerce_with_firebase/core/models/custom_button_input_model.dart';
 import 'package:e_commerce_with_firebase/core/services/cache_service.dart';
 import 'package:e_commerce_with_firebase/core/services/dependency_injection/dependency_injection.dart';
 import 'package:e_commerce_with_firebase/core/theme/app_colors.dart';
-import 'package:e_commerce_with_firebase/core/widgts/custom_button.dart';
 import 'package:flutter/material.dart';
 
 class SignOutButton extends StatelessWidget {
@@ -12,18 +10,34 @@ class SignOutButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final BaseCacheService cacheService = getIt<BaseCacheService>();
 
-    return customButton(
-        customButtonInputModel: CustomButtonInputModel(
-      context: context,
-      color: Colors.red,
-      text: 'Sign Out',
-      textColor: AppColors.whiteDesignColor,
-      onPressed: () {
-        cacheService.deletecache();
+    return SizedBox(
+      width: double.infinity,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.red,
+          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+          shape: RoundedRectangleBorder(
+            side: const BorderSide(color: AppColors.secondryColor, width: 2),
+            borderRadius: BorderRadius.circular(50),
+          ),
+        ),
+        onPressed: () {
+          cacheService.deletecache();
 
-        Navigator.of(context)
-            .pushNamedAndRemoveUntil('login', (route) => false);
-      },
-    ));
+          Navigator.of(context).pushNamedAndRemoveUntil(
+            'login',
+            (route) => false,
+          );
+        },
+        child: const Text(
+          "Sign Out",
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w600,
+            fontSize: 16,
+          ),
+        ),
+      ),
+    );
   }
 }

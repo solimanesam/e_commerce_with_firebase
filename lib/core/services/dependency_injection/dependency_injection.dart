@@ -1,6 +1,7 @@
 import 'package:e_commerce_with_firebase/core/services/admin_service.dart';
 import 'package:e_commerce_with_firebase/core/services/auth_services.dart';
 import 'package:e_commerce_with_firebase/core/services/cache_service.dart';
+import 'package:e_commerce_with_firebase/core/services/cart_service.dart';
 import 'package:e_commerce_with_firebase/core/services/database_service.dart';
 import 'package:e_commerce_with_firebase/core/services/local_notification_service.dart';
 import 'package:e_commerce_with_firebase/core/services/push_notifications_service.dart';
@@ -13,6 +14,9 @@ import 'package:e_commerce_with_firebase/features/auth/domain/repos/auth_base_re
 import 'package:e_commerce_with_firebase/features/auth/domain/use_cases/log_in_user_use_case.dart';
 import 'package:e_commerce_with_firebase/features/auth/domain/use_cases/sign_up_user_use_case.dart';
 import 'package:e_commerce_with_firebase/features/auth/presentation/controller/cubit/auth_cubit.dart';
+import 'package:e_commerce_with_firebase/features/dashboard/data/repos/cart_repo.dart';
+import 'package:e_commerce_with_firebase/features/dashboard/domain/repos/cart_base_repo.dart';
+import 'package:e_commerce_with_firebase/features/dashboard/presentation/cubit/cart_cubit.dart';
 import 'package:e_commerce_with_firebase/features/dashboard/presentation/cubit/getcoffee_cubit.dart';
 import 'package:get_it/get_it.dart';
 
@@ -24,7 +28,10 @@ class DependencyInjection {
     getIt.registerFactory(() => GetcoffeeCubit(getIt()));
     getIt.registerFactory(() => AdminDashboardCubit(adminBaseRepo: getIt()));
     getIt.registerFactory(() => OrdersCubit(getIt()));
+    getIt.registerFactory(() => CartCubit(cartBaseRepo: getIt()));
 
+    getIt.registerLazySingleton<CartBaseRepo>(
+        () => CartRepo(cartService: getIt()));
     getIt.registerLazySingleton<AdminBaseRepo>(
         () => AdminRepo(adminService: getIt()));
 
@@ -45,6 +52,7 @@ class DependencyInjection {
       () => FirebaseAuthServices(),
     );
 
+    getIt.registerLazySingleton<CartService>(() => CartServiceImpl());
     getIt.registerLazySingleton<AdminService>(() => AdminServiceImpl());
     getIt.registerLazySingleton<DatabaseService>(() => DatabaseServiceImpl());
     getIt.registerLazySingleton<AuthBaseRepo>(
