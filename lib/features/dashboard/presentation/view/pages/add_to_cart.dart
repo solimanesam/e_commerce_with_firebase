@@ -128,6 +128,7 @@ class _AddToCartState extends State<AddToCart> {
                           quantity: quantityNotifier.value,
                           userId: uId ?? '',
                           coffee: CoffeeModel(
+                              id: widget.coffee.id,
                               name: widget.coffee.name,
                               kind: widget.coffee.kind,
                               price: widget.coffee.price,
