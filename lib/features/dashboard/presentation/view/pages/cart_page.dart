@@ -1,3 +1,4 @@
+import 'package:e_commerce_with_firebase/core/services/dependency_injection/dependency_injection.dart';
 import 'package:e_commerce_with_firebase/core/theme/app_colors.dart';
 import 'package:e_commerce_with_firebase/core/theme/text_styles.dart';
 import 'package:e_commerce_with_firebase/core/widgts/app_loading_overlay.dart';
@@ -6,6 +7,7 @@ import 'package:e_commerce_with_firebase/core/widgts/custom_snake_bar.dart';
 import 'package:e_commerce_with_firebase/features/admin_dashboard/data/models/coffee_model.dart';
 import 'package:e_commerce_with_firebase/features/dashboard/presentation/cubit/cart_cubit.dart';
 import 'package:e_commerce_with_firebase/features/dashboard/presentation/cubit/cart_state.dart';
+import 'package:e_commerce_with_firebase/features/dashboard/presentation/cubit/orders_user_cubit.dart';
 import 'package:e_commerce_with_firebase/features/dashboard/presentation/view/components/cart_item_widget.dart';
 import 'package:e_commerce_with_firebase/features/dashboard/presentation/view/components/checkout_container.dart';
 import 'package:e_commerce_with_firebase/features/dashboard/presentation/view/components/remove_from_cart_bottom_sheet.dart';
@@ -67,7 +69,7 @@ class _CartPageState extends State<CartPage> {
                   if (items.isEmpty) {
                     return Center(
                       child: Text(
-                        "🛒 السلة فارغة حالياً",
+                        "Cart is empty 🛒",
                         style: TextStyles.semiBold32(
                           context,
                           color: AppColors.primaryColor,
@@ -151,7 +153,15 @@ class _CartPageState extends State<CartPage> {
                           },
                         ),
                       ),
-                      ChectOutContainer(totalPrice: totalPrice),
+                      BlocProvider(
+                        create: (context) => OrdersUserCubit(getIt()),
+                        child: ChectOutContainer(
+                          cubit: cartCubit,
+                          totalPrice: totalPrice,
+                          userId: widget.userId,
+                          items: items,
+                        ),
+                      ),
                     ],
                   );
                 }

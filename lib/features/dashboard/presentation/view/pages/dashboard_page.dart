@@ -7,6 +7,7 @@ import 'package:e_commerce_with_firebase/features/dashboard/presentation/cubit/d
 import 'package:e_commerce_with_firebase/features/dashboard/presentation/cubit/getcoffee_cubit.dart';
 import 'package:e_commerce_with_firebase/features/dashboard/presentation/view/pages/cart_page.dart';
 import 'package:e_commerce_with_firebase/features/dashboard/presentation/view/pages/home_page.dart';
+import 'package:e_commerce_with_firebase/features/shared/presentation/pages/settings_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -75,7 +76,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   child: CartPage(userId: userId!),
                 ),
                 const Center(child: Text('Profile')),
-                const Center(child: Text('Settings')),
+                SettingsPage(),
               ],
             ),
             bottomNavigationBar: ClipRRect(

@@ -36,7 +36,7 @@ class OrderCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Order #${order.id.substring(0, 6)}...",
+                  "Order #${order.id!.substring(0, 6)}...",
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
                 Chip(

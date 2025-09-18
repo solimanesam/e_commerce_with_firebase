@@ -27,7 +27,7 @@ class CartCubit extends Cubit<CartState> {
     result.fold(
       (failure) => emit(CartError(message: failure.message)),
       (_) {
-        emit(CartSuccess(message: "تمت الإضافة بنجاح"));
+        emit(CartSuccess(message: "item added successfully"));
       },
     );
   }
@@ -47,7 +47,7 @@ class CartCubit extends Cubit<CartState> {
       },
       (_) {
         print("success");
-        emit(CartSuccess(message: "تم الحذف بنجاح"));
+        emit(CartSuccess(message: "item removed successfully"));
         getCartItems(userId: userId);
       },
     );
@@ -59,7 +59,7 @@ class CartCubit extends Cubit<CartState> {
     result.fold(
       (failure) => emit(CartError(message: failure.message)),
       (_) {
-        emit(CartSuccess(message: "تم تفريغ السلة"));
+        emit(CartSuccess(message: "Cart cleared successfully"));
         getCartItems(userId: userId);
       },
     );

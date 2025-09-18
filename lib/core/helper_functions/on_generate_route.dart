@@ -4,6 +4,7 @@ import 'package:e_commerce_with_firebase/features/auth/presentation/view/pages/l
 import 'package:e_commerce_with_firebase/features/auth/presentation/view/pages/sign_up_page.dart';
 import 'package:e_commerce_with_firebase/features/dashboard/presentation/view/pages/dashboard_page.dart';
 import 'package:e_commerce_with_firebase/features/dashboard/presentation/view/pages/details_page.dart';
+import 'package:e_commerce_with_firebase/features/dashboard/presentation/view/pages/order_confirmation_page.dart';
 import 'package:flutter/material.dart';
 
 Route<dynamic> onGenerateRoute(RouteSettings settings) {
@@ -31,6 +32,10 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
     case 'adminadd':
       return MaterialPageRoute<dynamic>(
         builder: (BuildContext context) => AdminAddPage(),
+      );
+    case 'orderConfirmation':
+      return MaterialPageRoute<dynamic>(
+        builder: (BuildContext context) => OrderConfirmationPage(),
       );
 
     default:

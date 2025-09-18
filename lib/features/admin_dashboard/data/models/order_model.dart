@@ -3,10 +3,10 @@ import 'package:e_commerce_with_firebase/features/admin_dashboard/domain/entitie
 
 class OrderModel extends OrderEntity {
   const OrderModel({
-    required super.id,
+    super.id,
     required super.userId,
     required super.items,
-    required super.status,
+    super.status = "pending",
   });
 
   factory OrderModel.fromMap(Map<String, dynamic> map, String id) {
@@ -17,8 +17,9 @@ class OrderModel extends OrderEntity {
       items: (map["items"] as List<dynamic>? ?? [])
           .map((e) => OrderItem(
                 coffee: CoffeeModel.fromMap(
-                    Map<String, dynamic>.from(e["coffee"]),
-                    e["coffee"]["id"] ?? ""),
+                  Map<String, dynamic>.from(e["coffee"]),
+                  e["coffee"]["id"] ?? "",
+                ),
                 quantity: e["quantity"] ?? 1,
               ))
           .toList(),
@@ -31,7 +32,7 @@ class OrderModel extends OrderEntity {
       "status": status,
       "items": items
           .map((e) => {
-                "coffee": (e.coffee as CoffeeModel).toMap(),
+                "coffee": CoffeeModel.fromEntity(e.coffee).toMap(),
                 "quantity": e.quantity,
               })
           .toList(),

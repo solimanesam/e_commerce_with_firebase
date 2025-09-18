@@ -16,6 +16,7 @@ class _HomePageState extends State<HomePage>
   late TabController _tabController;
 
   final List<String> tabsStrings = [
+    'All',
     'Popular',
     'Black coffee',
     'Winter special',
@@ -76,6 +77,7 @@ class _HomePageState extends State<HomePage>
           child: TabBarView(
             controller: _tabController,
             children: [
+              DisplayUserCoffee(getKindCoffee: GetKindCoffee.all),
               DisplayUserCoffee(getKindCoffee: GetKindCoffee.popular),
               DisplayUserCoffee(getKindCoffee: GetKindCoffee.blackCoffee),
               DisplayUserCoffee(getKindCoffee: GetKindCoffee.winterSpecial),

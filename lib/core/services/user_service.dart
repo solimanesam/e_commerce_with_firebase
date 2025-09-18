@@ -12,11 +12,10 @@ class UserServiceImpl implements UserService {
   // الطلبات
   @override
   Future<void> placeOrder({required OrderModel order}) async {
-    var docRef = await firestore.collection("orders").add(order.toMap());
+    var docRef = firestore.collection("orders").doc();
     String generatedId = docRef.id;
 
-    // إضافة الـ id كحقل داخل الطلب
-    await docRef.update({"id": generatedId});
+    await docRef.set(order.toMap()..["id"] = generatedId);
   }
 
   @override

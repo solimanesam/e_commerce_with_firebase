@@ -19,6 +19,16 @@ class CoffeeModel extends CoffeeEntity {
     );
   }
 
+  factory CoffeeModel.fromEntity(CoffeeEntity entity) {
+    return CoffeeModel(
+      id: entity.id,
+      name: entity.name,
+      kind: entity.kind,
+      price: entity.price,
+      imageUrl: entity.imageUrl,
+    );
+  }
+
   Map<String, dynamic> toMap() {
     return {
       "id": id,

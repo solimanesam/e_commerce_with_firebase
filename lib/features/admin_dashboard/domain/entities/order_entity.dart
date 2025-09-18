@@ -58,13 +58,13 @@ class OrderItem {
 }
 
 class OrderEntity {
-  final String id;
+  final String? id;
   final String userId;
   final List<OrderItem> items;
   final String status;
 
   const OrderEntity({
-    required this.id,
+    this.id,
     required this.userId,
     required this.items,
     required this.status,

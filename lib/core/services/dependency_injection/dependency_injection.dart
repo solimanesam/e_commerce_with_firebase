@@ -5,6 +5,7 @@ import 'package:e_commerce_with_firebase/core/services/cart_service.dart';
 import 'package:e_commerce_with_firebase/core/services/database_service.dart';
 import 'package:e_commerce_with_firebase/core/services/local_notification_service.dart';
 import 'package:e_commerce_with_firebase/core/services/push_notifications_service.dart';
+import 'package:e_commerce_with_firebase/core/services/user_service.dart';
 import 'package:e_commerce_with_firebase/features/admin_dashboard/data/repos/admin_repo.dart';
 import 'package:e_commerce_with_firebase/features/admin_dashboard/domain/repos/admin_base_repo.dart';
 import 'package:e_commerce_with_firebase/features/admin_dashboard/presentation/controllers/cubit/admin_dashboard_cubit.dart';
@@ -15,9 +16,12 @@ import 'package:e_commerce_with_firebase/features/auth/domain/use_cases/log_in_u
 import 'package:e_commerce_with_firebase/features/auth/domain/use_cases/sign_up_user_use_case.dart';
 import 'package:e_commerce_with_firebase/features/auth/presentation/controller/cubit/auth_cubit.dart';
 import 'package:e_commerce_with_firebase/features/dashboard/data/repos/cart_repo.dart';
+import 'package:e_commerce_with_firebase/features/dashboard/data/repos/orders_repo.dart';
 import 'package:e_commerce_with_firebase/features/dashboard/domain/repos/cart_base_repo.dart';
+import 'package:e_commerce_with_firebase/features/dashboard/domain/repos/orders_base_repo.dart';
 import 'package:e_commerce_with_firebase/features/dashboard/presentation/cubit/cart_cubit.dart';
 import 'package:e_commerce_with_firebase/features/dashboard/presentation/cubit/getcoffee_cubit.dart';
+import 'package:e_commerce_with_firebase/features/dashboard/presentation/cubit/orders_user_cubit.dart';
 import 'package:get_it/get_it.dart';
 
 GetIt getIt = GetIt.instance;
@@ -29,12 +33,13 @@ class DependencyInjection {
     getIt.registerFactory(() => AdminDashboardCubit(adminBaseRepo: getIt()));
     getIt.registerFactory(() => OrdersCubit(getIt()));
     getIt.registerFactory(() => CartCubit(cartBaseRepo: getIt()));
-
+    getIt.registerFactory(() => OrdersUserCubit(getIt()));
     getIt.registerLazySingleton<CartBaseRepo>(
         () => CartRepo(cartService: getIt()));
     getIt.registerLazySingleton<AdminBaseRepo>(
         () => AdminRepo(adminService: getIt()));
-
+    getIt.registerLazySingleton<OrdersBaseRepo>(
+        () => OrdersRepo(userService: getIt()));
     getIt.registerLazySingleton<SignUpUserUseCase>(
       () => SignUpUserUseCase(authBaseRepo: getIt()),
     );
@@ -51,7 +56,7 @@ class DependencyInjection {
     getIt.registerLazySingleton<AuthServices>(
       () => FirebaseAuthServices(),
     );
-
+    getIt.registerLazySingleton<UserService>(() => UserServiceImpl());
     getIt.registerLazySingleton<CartService>(() => CartServiceImpl());
     getIt.registerLazySingleton<AdminService>(() => AdminServiceImpl());
     getIt.registerLazySingleton<DatabaseService>(() => DatabaseServiceImpl());

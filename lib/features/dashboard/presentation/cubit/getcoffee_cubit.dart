@@ -14,8 +14,11 @@ class GetcoffeeCubit extends Cubit<GetcoffeeState> {
     final result = await adminBaseRepo.getAllCoffees();
     result.fold((l) => emit(GetcoffeeFailure(l.message)), (r) {
       switch (getKindCoffee) {
-        case GetKindCoffee.popular:
+        case GetKindCoffee.all:
           coffees = r;
+          break;
+        case GetKindCoffee.popular:
+          coffees = r.where((element) => element.kind == "Popular").toList();
           break;
         case GetKindCoffee.blackCoffee:
           coffees =
@@ -34,4 +37,4 @@ class GetcoffeeCubit extends Cubit<GetcoffeeState> {
   }
 }
 
-enum GetKindCoffee { popular, blackCoffee, winterSpecial, decaffee }
+enum GetKindCoffee { all, popular, blackCoffee, winterSpecial, decaffee }

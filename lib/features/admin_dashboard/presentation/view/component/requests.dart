@@ -29,12 +29,12 @@ class Requests extends StatelessWidget {
                         order: state.orders[index],
                         onApprove: () {
                           context.read<OrdersCubit>().updateStatus(
-                              orderId: state.orders[index].id,
+                              orderId: state.orders[index].id!,
                               status: 'approved');
                         },
                         onReject: () {
                           context.read<OrdersCubit>().updateStatus(
-                              orderId: state.orders[index].id,
+                              orderId: state.orders[index].id!,
                               status: 'rejected');
                         },
                       );
