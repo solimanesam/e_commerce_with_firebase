@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:e_commerce_with_firebase/core/errors/failures.dart';
 import 'package:e_commerce_with_firebase/core/services/user_service.dart';
 import 'package:e_commerce_with_firebase/features/admin_dashboard/data/models/order_model.dart';
+import 'package:e_commerce_with_firebase/features/admin_dashboard/domain/entities/order_entity.dart';
 import 'package:e_commerce_with_firebase/features/dashboard/domain/repos/orders_base_repo.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -10,7 +11,7 @@ class OrdersRepo extends OrdersBaseRepo {
 
   OrdersRepo({required this.userService});
   @override
-  Future<Either<Failure, List<OrderModel>>> getUserOrders(
+  Future<Either<Failure, List<OrderEntity>>> getUserOrders(
       {required String userId}) async {
     try {
       final orders = await userService.getUserOrders(userId: userId);

@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:e_commerce_with_firebase/features/admin_dashboard/data/models/order_model.dart';
+import 'package:e_commerce_with_firebase/features/admin_dashboard/domain/entities/order_entity.dart';
 import 'package:e_commerce_with_firebase/features/dashboard/domain/repos/orders_base_repo.dart';
 import 'package:equatable/equatable.dart';
 

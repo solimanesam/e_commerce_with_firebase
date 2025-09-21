@@ -11,7 +11,7 @@ class DashboardCubit extends Cubit<DashboardState> {
     return [
       buildNavItem(Icons.home_outlined, 0),
       buildNavItem(Icons.shopping_cart_outlined, 1),
-      buildNavItem(Icons.favorite_border, 2),
+      buildNavItem(Icons.list, 2),
       buildNavItem(Icons.person_2_outlined, 3),
     ];
   }
@@ -37,7 +37,6 @@ class DashboardCubit extends Cubit<DashboardState> {
     return BottomNavigationBarItem(
       icon: Column(
         mainAxisSize: MainAxisSize.min,
-        
         children: [
           Container(
             width: 48,
@@ -47,10 +46,10 @@ class DashboardCubit extends Cubit<DashboardState> {
               borderRadius: BorderRadius.vertical(bottom: Radius.circular(10)),
             ),
           ),
-         Transform.translate(
-          offset: Offset(0, 10), 
-          child: Icon(icon),
-        ),
+          Transform.translate(
+            offset: Offset(0, 10),
+            child: Icon(icon),
+          ),
         ],
       ),
       label: '',

@@ -17,7 +17,7 @@ final class OrdersUserFailure extends OrdersUserState {
 }
 
 final class OrdersUserLoaded extends OrdersUserState {
-  final List<OrderModel> orders;
+  final List<OrderEntity> orders;
   const OrdersUserLoaded({required this.orders});
 }
 
