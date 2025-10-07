@@ -118,7 +118,7 @@ class _OrderConfirmationPageState extends State<OrderConfirmationPage>
                         ),
                       ).copyWith(
                         backgroundColor:
-                            MaterialStateProperty.all(Colors.transparent),
+                            WidgetStateProperty.all(Colors.transparent),
                       ),
                       onPressed: _navigateNext,
                       child: Ink(

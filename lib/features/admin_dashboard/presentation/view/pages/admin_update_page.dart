@@ -104,7 +104,7 @@ class _AdminUpdatePageState extends State<AdminUpdatePage> {
                 ),
               ),
               DropdownButtonFormField<String>(
-                value: updateSelectedKind, // default value
+                initialValue: updateSelectedKind, // default value
                 items: coffeeKinds
                     .map((kind) =>
                         DropdownMenuItem(value: kind, child: Text(kind)))
